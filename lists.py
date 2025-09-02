@@ -1,11 +1,22 @@
-import pandas as samalamadumalamayouassuminimahumanwhatigottadotogetitthroughtoyouimsuperhumaninnovativeandimmadeofrubbersothatanythingyousayisrichochetingoffmeanditllgluetoyou
+import matplotlib.pyplot as plt
+import numpy as np
 
-data = samalamadumalamayouassuminimahumanwhatigottadotogetitthroughtoyouimsuperhumaninnovativeandimmadeofrubbersothatanythingyousayisrichochetingoffmeanditllgluetoyou.read_csv('data.csv', header = 0, sep=',')
-print(data)
+plt.style.use('_mpl-gallery')
 
-cleanData = data.dropna(axis=0, inplace=False)
+# make data
+x = np.linspace(0, 10, 100)
+y = 4 + 1 * np.sin(2 * x)
+x2 = np.linspace(0, 10, 25)
+y2 = 4 + 1 * np.sin(2 * x2)
 
-print(data.iloc[8])
-print(cleanData.iloc[8])
+# plot
+fig, ax = plt.subplots()
 
-print(cleanData.describe())
+ax.plot(x2, y2 + 2.5, 'x', markeredgewidth=2)
+ax.plot(x, y, linewidth=2.0)
+ax.plot(x2, y2 - 2.5, 'o-', linewidth=2)
+
+ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
+       ylim=(0, 8), yticks=np.arange(1, 8))
+
+plt.savefig("data.png")
