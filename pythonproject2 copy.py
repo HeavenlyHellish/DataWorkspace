@@ -3,7 +3,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 
-
 # Load the dataset
 frame = pan.read_csv("Genshin Impact Survey Results.csv", skipinitialspace=True)
 
@@ -39,20 +38,11 @@ model.fit(x_train, y_train)
 r_squared = model.score(x_train, y_train)
 print("R^2:", r_squared)
 
-# Encode target and save original labels
-spending_encoder = LabelEncoder()
-frame['How much have you spent'] = spending_encoder.fit_transform(frame['How much have you spent'])
-spending_labels = spending_encoder.classes_
+# Create a graph
 
-# Create and save the scatter plot with decoded y-axis labels
-plt.figure(figsize=(10, 6))
-plt.scatter(frame['Age'], frame['How much have you spent'], color='blue')
-plt.xlabel("Age")
-plt.ylabel("How much have you spent")
+plt.scatter(x, y, color='blue')
+
+plt.xlabel("Age")  
+plt.ylabel("How much have you spent (encoded)")
 plt.title("Age vs. Spending")
-plt.yticks(ticks=range(len(spending_labels)), labels=spending_labels, rotation=45)
-plt.tight_layout()
-plt.savefig("age_vs_spending.png")
-plt.show()
-
-# Validation data
+savefig = "age_vs_spending.png"
