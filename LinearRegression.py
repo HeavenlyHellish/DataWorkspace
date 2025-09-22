@@ -1,3 +1,5 @@
+# LINEAR REGRESSION MODEL
+
 import pandas as pan
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -38,11 +40,18 @@ model.fit(x_train, y_train)
 r_squared = model.score(x_train, y_train)
 print("R^2:", r_squared)
 
-# Create a graph
+# Encode target and save original labels
+spending_encoder = LabelEncoder()
+frame['How much have you spent'] = spending_encoder.fit_transform(frame['How much have you spent'])
+spending_labels = spending_encoder.classes_
 
-plt.scatter(x, y, color='blue')
-
-plt.xlabel("Age")  
-plt.ylabel("How much have you spent (encoded)")
+# Create and save the scatter plot with decoded y-axis labels
+plt.figure(figsize=(10, 6))
+plt.scatter(frame['Age'], frame['How much have you spent'], color='blue')
+plt.xlabel("Age")
+plt.ylabel("How much have you spent")
 plt.title("Age vs. Spending")
-savefig = "age_vs_spending.png"
+plt.yticks(ticks=range(len(spending_labels)), labels=spending_labels, rotation=45)
+plt.tight_layout()
+plt.savefig("age_vs_spending.png")
+plt.show()
